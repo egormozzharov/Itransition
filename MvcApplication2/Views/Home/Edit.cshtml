@@ -1,0 +1,19 @@
+﻿@using System.Collections.Generic;
+@model MvcApplication2.Models.UserInfo
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm())
+{
+    <h2>Edit @Model.Name</h2>
+    <p>Имя:  @Html.TextBox("Name", Model.Name)</p>
+    <p>Фамилия:     @Html.TextBox("SecondName", Model.SecondName)</p>
+    <p>Пол:   
+        @Html.DropDownList("Gender", (IEnumerable<SelectListItem>)ViewBag.MovieType, (object)null)
+    </p>
+
+    <input type="submit" value="Edit" />
+}
