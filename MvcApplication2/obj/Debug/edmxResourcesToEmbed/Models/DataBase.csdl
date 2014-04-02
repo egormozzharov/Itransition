@@ -1,25 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DataBaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="DataBase" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="UserInfoes" EntityType="DataBaseModel.UserInfo" />
+    <EntitySet Name="sysdiagrams" EntityType="DataBaseModel.sysdiagram" />
     <EntitySet Name="Users" EntityType="DataBaseModel.User" />
-    <AssociationSet Name="FK_UserInfo_User1" Association="DataBaseModel.FK_UserInfo_User1">
+    <EntitySet Name="UserInfoes" EntityType="DataBaseModel.UserInfo" />
+    <AssociationSet Name="FK_UserInfo_User" Association="DataBaseModel.FK_UserInfo_User">
       <End Role="User" EntitySet="Users" />
       <End Role="UserInfo" EntitySet="UserInfoes" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="UserInfo">
+  <EntityType Name="sysdiagram">
     <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="UserInfoId" />
+      <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="SecondName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="Sex" Type="Boolean" />
-    <Property Type="Int32" Name="UserInfoId" Nullable="false" />
-    <Property Type="Boolean" Name="SexShmax" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="DataBaseModel.FK_UserInfo_User1" FromRole="UserInfo" ToRole="User" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="principal_id" Nullable="false" />
+    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="version" />
+    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -29,9 +27,19 @@
     <Property Type="String" Name="Login" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="UserInfo" Relationship="DataBaseModel.FK_UserInfo_User1" FromRole="User" ToRole="UserInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="DataBaseModel.FK_UserInfo_User" FromRole="User" ToRole="UserInfo" />
   </EntityType>
-  <Association Name="FK_UserInfo_User1">
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SecondName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Sex" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="DataBaseModel.FK_UserInfo_User" FromRole="UserInfo" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_UserInfo_User">
     <End Type="DataBaseModel.User" Role="User" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -41,7 +49,7 @@
         <PropertyRef Name="UserId" />
       </Principal>
       <Dependent Role="UserInfo">
-        <PropertyRef Name="UserInfoId" />
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

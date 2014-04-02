@@ -5,3 +5,30 @@
 }
 
 <h2>Register</h2>
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>@Html.LabelFor(m => m.Login)</td>
+            <td>@Html.TextBoxFor(m => m.Login)</td>   
+            <td>@Html.ValidationMessageFor(model => model.Login)</td>  
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Password)</td>
+            <td>@Html.PasswordFor(m => m.Password)</td>   
+            <td>@Html.ValidationMessageFor(model => model.Password)</td>  
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Email)</td>
+            <td>@Html.TextBoxFor(m => m.Email)</td>   
+            <td>@Html.ValidationMessageFor(model => model.Email)</td>  
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Register" />
+            </td>
+        </tr>
+    </table>
+    
+}

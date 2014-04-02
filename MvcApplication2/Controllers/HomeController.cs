@@ -20,9 +20,35 @@ namespace MvcApplication2.Controllers
             return View(allUserInfo);
         }
 
+      //  [Authorize]
+        [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            return View("Register");
+        }
+
+        [HttpPost]
+        public ActionResult Register(User user)
+        {
+            
+            ActionResult actionResult;
+            // check valid
+            if (ModelState.IsValid)
+            {
+
+                if (true)// check if this login already taken
+                {
+                    if (true)// check if this email alredy taken
+                    {
+                        actionResult = View("SuccesedRegistartion");
+                    }
+                }
+            }
+            else
+            {
+                actionResult = View("Register");
+            }
+            return actionResult;
         }
 
         [HttpGet]

@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-@Html.ActionLink("Register", "Register", "Home", null);
+@Html.ActionLink("Register", "Register", "Home", null)
 
 <h2>All users</h2>
 @{
     foreach (var user in Model)
     {
-        <li>@user.Name - @user.SecondName - @user.Gender   @Html.ActionLink("Edit" + " " + @user.Name, "Edit", new { id = user.Id} )</li>
+        <li>@user.Name - @user.SecondName - @user.Gender   @Html.ActionLink("Edit" + " " + @user.Name, "Edit", new { id = user.UserId} )</li>
     }
 }

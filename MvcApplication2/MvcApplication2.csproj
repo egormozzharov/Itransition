@@ -131,7 +131,17 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\DataManager.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserInfo.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserInfoMeta.cs" />
+    <Compile Include="Models\UserMeta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +152,7 @@
     <Content Include="App_Data\DataBase_log.ldf">
       <DependentUpon>DataBase.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\Style.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\DataBase.Context.tt">
       <DependentUpon>DataBase.edmx</DependentUpon>
@@ -185,6 +196,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\SuccesedRegistartion.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

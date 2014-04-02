@@ -9,6 +9,7 @@
 @using (Html.BeginForm())
 {
     <h2>Edit @Model.Name</h2>
+    @Html.Hidden("UserId", Model.UserId)
     <p>Имя:  @Html.TextBox("Name", Model.Name)</p>
     <p>Фамилия:     @Html.TextBox("SecondName", Model.SecondName)</p>
     <p>Пол:   

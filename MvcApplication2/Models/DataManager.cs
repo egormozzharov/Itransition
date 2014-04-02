@@ -35,12 +35,12 @@ namespace MvcApplication2.Models
 
         public UserInfo GetUserById(int id)
         {
-            return db.UserInfoes.SingleOrDefault(user => user.Id == id);
+            return db.UserInfoes.SingleOrDefault(user => user.UserId == id);
         }
 
         public void UpdateUser(UserInfo user)
         {
-            UserInfo oldUser = GetUserById(user.Id);
+            UserInfo oldUser = GetUserById(user.UserId);
             oldUser.Name = user.Name;
             oldUser.SecondName = user.SecondName;
             oldUser.Sex = user.Sex;
