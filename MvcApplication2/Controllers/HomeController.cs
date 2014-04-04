@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcApplication2.DataBaseClasses;
 using MvcApplication2.Models;
 
 namespace MvcApplication2.Controllers
@@ -16,7 +17,7 @@ namespace MvcApplication2.Controllers
         {
             DataManager dataManager = new DataManager();
             IEnumerable<UserInfo> allUserInfo = dataManager.GetUsers();
-
+            
             return View(allUserInfo);
         }
 
@@ -28,20 +29,36 @@ namespace MvcApplication2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User user)
+        public ActionResult Register(String login, String email, String password)
         {
-            
+            DataBaseUser dataBaseUser = new DataBaseUser();
             ActionResult actionResult;
             // check valid
             if (ModelState.IsValid)
             {
-
-                if (true)// check if this login already taken
+                if (dataBaseUser.IsExistsLogin(login) == false)// check if this login already taken
                 {
-                    if (true)// check if this email alredy taken
+
+                    if (dataBaseUser.IsExistsEmail(email) == false)// check if this email alredy taken
                     {
+                        User newUser = new User();
+                        newUser.Login = login;
+                        newUser.Email = email;
+                        newUser.Password = password;
+                        dataBaseUser.AddUser(newUser);
+                        dataBaseUser.SaveChanges();
                         actionResult = View("SuccesedRegistartion");
                     }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "Email is already taken!");
+                        actionResult = View("Register");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Login", "Login is already taken!");
+                    actionResult = View("Register");
                 }
             }
             else
